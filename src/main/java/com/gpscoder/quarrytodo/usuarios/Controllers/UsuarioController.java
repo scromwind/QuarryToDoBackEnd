@@ -14,7 +14,7 @@ import com.gpscoder.quarrytodo.usuarios.Services.UsuarioService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/Usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired

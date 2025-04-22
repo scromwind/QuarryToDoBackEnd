@@ -8,7 +8,7 @@ import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioLoginDto;
 import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioSalidaDto;
 import com.gpscoder.quarrytodo.usuarios.Models.UsuarioModel;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UsuarioMapper {
 
     public UsuarioSalidaDto toUsuarioSalidaDto (UsuarioModel usuario);
