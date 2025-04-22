@@ -22,7 +22,7 @@ public class SecurityConfig {
             .and()
             .csrf().disable() // desactiva CSRF (para APIs REST)
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll() // permite todo
+                .anyRequest().permitAll() // permite todo (para pruebas)
             );
 
         return http.build();
@@ -32,11 +32,11 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // permite todos los orígenes, métodos y headers
-        configuration.setAllowedOriginPatterns(List.of("*")); // "*" para Spring Boot 3.x
+        // permite solicitudes desde el frontend local
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true); // permite cookies si es necesario
+        configuration.setAllowCredentials(true); // necesario si el frontend manda cookies o headers como Authorization
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration); // aplica a todos los endpoints
