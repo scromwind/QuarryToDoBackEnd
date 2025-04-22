@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioEntradaDto;
+import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioLoginDto;
 import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioSalidaDto;
 import com.gpscoder.quarrytodo.usuarios.Mappers.UsuarioMapper;
 import com.gpscoder.quarrytodo.usuarios.Models.UsuarioModel;
@@ -34,6 +35,11 @@ public class UsuarioServiceImplement implements UsuarioService {
             return null;
         }
 
+    }
+
+    @Override
+    public UsuarioSalidaDto iniciarSesion(UsuarioLoginDto datosLogin) {
+        return null;
     }
 
 }

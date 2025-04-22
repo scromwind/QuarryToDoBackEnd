@@ -8,4 +8,5 @@ import com.gpscoder.quarrytodo.usuarios.Models.UsuarioModel;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long>{
 
+    
 }
