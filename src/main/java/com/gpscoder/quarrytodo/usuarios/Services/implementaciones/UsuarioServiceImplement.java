@@ -1,5 +1,7 @@
 package com.gpscoder.quarrytodo.usuarios.Services.implementaciones;
 
+import java.util.Optional;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +41,22 @@ public class UsuarioServiceImplement implements UsuarioService {
 
     @Override
     public UsuarioSalidaDto iniciarSesion(UsuarioLoginDto datosLogin) {
-        return null;
+        Optional<UsuarioModel> usuarioModel = usuarioRepository.findByDni(datosLogin.getDni());
+        if(usuarioModel.isPresent()){
+            boolean validarPassword = EncoderPassword.matches(datosLogin.getPassword(), usuarioModel.get().getPassword());
+            if (validarPassword) {
+                return usuarioMapper.toUsuarioSalidaDto(usuarioModel.get());
+            }
+            else{
+                
+                System.out.println("Contraseña no coincide");
+                return null;
+            }
+        }else{
+            System.out.println("Usuario no encontrado");
+            return null;
+        }
+        
     }
 
 }

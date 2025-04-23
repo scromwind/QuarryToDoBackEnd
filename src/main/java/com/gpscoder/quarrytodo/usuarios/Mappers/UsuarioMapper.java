@@ -13,6 +13,7 @@ public interface UsuarioMapper {
 
     public UsuarioSalidaDto toUsuarioSalidaDto (UsuarioModel usuario);
 
+    @Mapping(target = "id",ignore = true)
     @Mapping(target = "createdAt",ignore = true)
     public UsuarioModel toUsuarioModel(UsuarioEntradaDto usuario);
 

@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class UsuarioSalidaDto {
 
     private Long id;
-    private String nombre;
-    private String dni;
+
 }

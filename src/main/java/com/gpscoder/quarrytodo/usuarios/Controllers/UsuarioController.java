@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioEntradaDto;
+import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioLoginDto;
 import com.gpscoder.quarrytodo.usuarios.Dtos.UsuarioSalidaDto;
 import com.gpscoder.quarrytodo.usuarios.Services.UsuarioService;
 
@@ -22,8 +23,13 @@ public class UsuarioController {
 
     @PostMapping("/crear")
     public ResponseEntity <UsuarioSalidaDto> CrearUsuario(@RequestBody UsuarioEntradaDto usuario) {
-        
         UsuarioSalidaDto usuarioSalida = usuarioService.crearUsuario(usuario);
+        return ResponseEntity.ok(usuarioSalida);
+    }
+
+    @PostMapping("/iniciarSesion")
+    public ResponseEntity<UsuarioSalidaDto> IniciarSesion(@RequestBody UsuarioLoginDto credenciales){
+        UsuarioSalidaDto usuarioSalida = usuarioService.iniciarSesion(credenciales);
         return ResponseEntity.ok(usuarioSalida);
     }
     
