@@ -26,7 +26,6 @@ public class UsuarioServiceImplement implements UsuarioService {
     @Override
     public UsuarioSalidaDto crearUsuario(UsuarioEntradaDto usuario) {
         try{
-            System.out.println("el usuario es "+usuario);
             String passwordEncoder = EncoderPassword.encode(usuario.getPassword());
             usuario.setPassword(passwordEncoder);
             UsuarioModel usuarioModel = usuarioMapper.toUsuarioModel(usuario);
@@ -41,9 +40,12 @@ public class UsuarioServiceImplement implements UsuarioService {
 
     @Override
     public UsuarioSalidaDto iniciarSesion(UsuarioLoginDto datosLogin) {
+        System.out.println("los datos enviados por el front son "+datosLogin);
         Optional<UsuarioModel> usuarioModel = usuarioRepository.findByDni(datosLogin.getDni());
+        System.out.println("el usuarioModel encontrado es "+ usuarioModel);
         if(usuarioModel.isPresent()){
             boolean validarPassword = EncoderPassword.matches(datosLogin.getPassword(), usuarioModel.get().getPassword());
+            System.out.println("la comparacion de la contraseña es "+validarPassword);
             if (validarPassword) {
                 return usuarioMapper.toUsuarioSalidaDto(usuarioModel.get());
             }
