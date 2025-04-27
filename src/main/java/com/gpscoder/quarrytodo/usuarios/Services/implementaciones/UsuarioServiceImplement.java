@@ -32,31 +32,24 @@ public class UsuarioServiceImplement implements UsuarioService {
             UsuarioModel usuarioGuardado = usuarioRepository.save(usuarioModel);
             return usuarioMapper.toUsuarioSalidaDto(usuarioGuardado);
         }catch(Exception e){
-            System.err.println(e);
-            return null;
+            throw new RuntimeException("Error al Crear el Usuario");
         }
 
     }
 
     @Override
     public UsuarioSalidaDto iniciarSesion(UsuarioLoginDto datosLogin) {
-        System.out.println("los datos enviados por el front son "+datosLogin);
         Optional<UsuarioModel> usuarioModel = usuarioRepository.findByDni(datosLogin.getDni());
-        System.out.println("el usuarioModel encontrado es "+ usuarioModel);
         if(usuarioModel.isPresent()){
             boolean validarPassword = EncoderPassword.matches(datosLogin.getPassword(), usuarioModel.get().getPassword());
-            System.out.println("la comparacion de la contraseña es "+validarPassword);
             if (validarPassword) {
                 return usuarioMapper.toUsuarioSalidaDto(usuarioModel.get());
             }
             else{
-                
-                System.out.println("Contraseña no coincide");
-                return null;
+                throw new RuntimeException("Contraseñas no coinciden");
             }
         }else{
-            System.out.println("Usuario no encontrado");
-            return null;
+            throw new RuntimeException("Usuario no encontrado");
         }
         
     }
