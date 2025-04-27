@@ -29,7 +29,7 @@ public class TareaServiceImplement implements TareaService{
         if(!tareaModel.isEmpty()){
             return tareaMapper.toListDto(tareaModel);
         }else{
-            throw new RuntimeException("Sin Tareas Pendientes o Creadas");
+            return null;
         }
     }
 
@@ -88,10 +88,10 @@ public class TareaServiceImplement implements TareaService{
             if (tareaSalidaDto != null) {
                 return tareaSalidaDto;
             }else{
-                throw new RuntimeException("Error al pasar de modelo a dto");
+                return null;
             }
         }else{
-            throw new RuntimeException("Tarea no encontrada");
+            return null;
         }
     }
 

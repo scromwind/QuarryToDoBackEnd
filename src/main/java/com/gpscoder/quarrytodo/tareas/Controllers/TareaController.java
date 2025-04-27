@@ -25,8 +25,13 @@ public class TareaController {
 
     @PostMapping("listaTareas")
     public ResponseEntity<List<TareaSalidaDto>> listarTareas(@RequestBody Long usuarioId) {
-
-        return ResponseEntity.ok(tareaService.listarTareas(usuarioId));
+        List<TareaSalidaDto> listaTareas = tareaService.listarTareas(usuarioId);
+        
+        if(listaTareas != null){
+            return new ResponseEntity<>(listaTareas,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/crearTarea")
@@ -53,8 +58,13 @@ public class TareaController {
     @PostMapping("/buscar")
     public ResponseEntity<TareaSalidaDto>BuscarTarea(@RequestBody Long tareaId){
         TareaSalidaDto tarea = tareaService.buscarTarea(tareaId);
+
+        if(tarea != null){
+            return new ResponseEntity<>(tarea,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         
-        return ResponseEntity.ok(tarea);
     }
 
     @PostMapping("/eliminar")
