@@ -33,7 +33,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // permite solicitudes desde el frontend local
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500, https://scromwind.github.io"));
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true); // necesario si el frontend manda cookies o headers como Authorization
