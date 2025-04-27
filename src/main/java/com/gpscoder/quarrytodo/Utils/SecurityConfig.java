@@ -16,13 +16,13 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // Usando la sintaxis de lambda para la configuración
         http
-            .cors() // habilita CORS
-            .and()
-            .csrf().disable() // desactiva CSRF (para APIs REST)
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))  // Configuración CORS
+            .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll() // permite todo (para pruebas)
+                .anyRequest().permitAll() // Permitir todas las solicitudes (para pruebas)
             );
 
         return http.build();
@@ -32,14 +32,14 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // permite solicitudes desde el frontend local
-        configuration.setAllowedOrigins(List.of("*"));
+        // Permitir solicitudes desde el frontend local (reemplaza con el origen correcto)
+        configuration.setAllowedOrigins(List.of("https://scromwind.github.io/quarrytodoFrontEnd/"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true); // necesario si el frontend manda cookies o headers como Authorization
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // aplica a todos los endpoints
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }
