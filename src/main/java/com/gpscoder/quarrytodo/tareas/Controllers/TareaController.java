@@ -23,7 +23,7 @@ public class TareaController {
 
     private final TareaService tareaService;
 
-    @PostMapping("listaTareas")
+    @PostMapping("/listaTareas")
     public ResponseEntity<List<TareaSalidaDto>> listarTareas(@RequestBody Long usuarioId) {
         List<TareaSalidaDto> listaTareas = tareaService.listarTareas(usuarioId);
         
