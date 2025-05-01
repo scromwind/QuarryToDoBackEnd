@@ -33,7 +33,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Permitir solicitudes desde el frontend local (reemplaza con el origen correcto)
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500,https://quarrytodobackend-production.up.railway.app"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
