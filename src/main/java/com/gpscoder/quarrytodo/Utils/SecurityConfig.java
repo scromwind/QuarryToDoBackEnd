@@ -35,7 +35,7 @@ public class SecurityConfig {
         // Permitir solicitudes desde el frontend local (reemplaza con el origen correcto)
         configuration.setAllowedOrigins(List.of(
             "http://127.0.0.1:5500",
-            "https://scromwind.github.io/quarrytodoFrontEnd"));
+            "https://scromwind.github.io/quarrytodoFrontEnd/"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
