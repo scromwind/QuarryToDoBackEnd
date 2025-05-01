@@ -11,4 +11,5 @@ import com.gpscoder.quarrytodo.tareas.Models.TareaModel;
 public interface TareaRepository extends JpaRepository<TareaModel,Long>{
 
     List<TareaModel> findByFinalizadaFalseAndUsuarioId(Long id);
+    List<TareaModel> findByFinalizadaTrueAndUsuarioId(Long id);
 }

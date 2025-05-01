@@ -24,7 +24,17 @@ public class TareaServiceImplement implements TareaService{
     private final UsuarioRepository usuarioRepository;
 
     @Override
-    public List<TareaSalidaDto> listarTareas(Long usuarioId) {
+    public List<TareaSalidaDto> listarTareasFinalizadas(Long usuarioId) {
+        List<TareaModel> tareaModel = tareaRepository.findByFinalizadaTrueAndUsuarioId(usuarioId);
+        if(!tareaModel.isEmpty()){
+            return tareaMapper.toListDto(tareaModel);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public List<TareaSalidaDto> listarTareasPendientes(Long usuarioId) {
         List<TareaModel> tareaModel = tareaRepository.findByFinalizadaFalseAndUsuarioId(usuarioId);
         if(!tareaModel.isEmpty()){
             return tareaMapper.toListDto(tareaModel);
@@ -101,6 +111,23 @@ public class TareaServiceImplement implements TareaService{
         if(existe){
             TareaModel tareaModel = tareaRepository.findById(idTarea).get();
             tareaModel.setFinalizada(true);
+            TareaModel tareaGuardada = tareaRepository.save(tareaModel);
+            if (tareaGuardada != null) {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false; 
+        }
+    }
+
+    @Override
+    public boolean tareaPendiente(Long idTarea) {
+        boolean existe = tareaRepository.existsById(idTarea);
+        if(existe){
+            TareaModel tareaModel = tareaRepository.findById(idTarea).get();
+            tareaModel.setFinalizada(false);
             TareaModel tareaGuardada = tareaRepository.save(tareaModel);
             if (tareaGuardada != null) {
                 return true;
